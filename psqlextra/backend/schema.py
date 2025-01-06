@@ -79,7 +79,7 @@ class PostgresSchemaEditor(SchemaEditor):
         "CREATE TABLE %s PARTITION OF %s FOR VALUES IN (%s)"
     )
     sql_add_list_sub_partition = "CREATE TABLE %s PARTITION OF %s FOR VALUES IN (%s) PARTITION BY LIST (%s)"
-    sql_delete_partition = "DROP TABLE %s"
+    sql_delete_partition = "DROP TABLE IF EXISTS %s"
     sql_truncate_partition = "TRUNCATE TABLE %s"
     sql_table_comment = "COMMENT ON TABLE %s IS %s"
 
