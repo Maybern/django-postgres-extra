@@ -1,6 +1,7 @@
 # Ignore virtual environments
 env/
 .env/
+.venv/
 
 # Ignore Python byte code cache
 *.pyc
@@ -15,6 +16,7 @@ reports/
 *.egg-info/
 pip-wheel-metadata/
 dist/
+build/
 
 # Ignore stupid .DS_Store
 .DS_Store
@@ -28,3 +30,6 @@ dist/
 
 # Ignore PyCharm / IntelliJ files
 .idea/
+build/
+.python-version
+docker-compose.yml
