@@ -167,8 +167,15 @@ def fake_model(fake_model_fk_target_1, fake_model_fk_target_2):
                 fields=["first_name", "last_name"],
                 name="first_last_name_uniq",
             ),
+            # Django 5.1 renamed `check=` to `condition=` and 6.0 removed
+            # the old kwarg, so feed the right name for the running version.
             models.CheckConstraint(
-                check=Q(age__gt=0, height__gt=0), name="age_height_check"
+                name="age_height_check",
+                **(
+                    {"condition": Q(age__gt=0, height__gt=0)}
+                    if django.VERSION >= (5, 1)
+                    else {"check": Q(age__gt=0, height__gt=0)}
+                ),
             ),
         ],
         "unique_together": (

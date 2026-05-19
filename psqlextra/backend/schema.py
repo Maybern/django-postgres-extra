@@ -256,9 +256,9 @@ class PostgresSchemaEditor(SchemaEditor):
                 )
 
             if django.VERSION < (5, 1):
-                if model._meta.index_together:
+                if model._meta.index_together:  # type: ignore[attr-defined]
                     self.alter_index_together(
-                        model, tuple(), model._meta.index_together
+                        model, tuple(), model._meta.index_together  # type: ignore[attr-defined]
                     )
 
             for field in model._meta.local_concrete_fields:  # type: ignore[attr-defined]
@@ -301,11 +301,11 @@ class PostgresSchemaEditor(SchemaEditor):
                         self.sql_create_fk_not_valid,
                         table=self.quote_name(model._meta.db_table),
                         name=self.quote_name(fk_name),
-                        column=self.quote_name(field.column),
+                        column=self.quote_name(field.column),  # type: ignore[arg-type]
                         to_table=self.quote_name(
-                            field.target_field.model._meta.db_table
+                            field.target_field.model._meta.db_table  # type: ignore[attr-defined]
                         ),
-                        to_column=self.quote_name(field.target_field.column),
+                        to_column=self.quote_name(field.target_field.column),  # type: ignore[attr-defined]
                         deferrable=self.connection.ops.deferrable_sql(),
                     )
 

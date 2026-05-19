@@ -87,9 +87,14 @@ def make_migration(app_label="tests", from_state=None, to_state=None):
         specified_apps=app_labels, dry_run=False
     )
 
+    # Clone the states because `MigrationAutodetector` mutates them
+    # (e.g. `generate_created_models` pops `indexes`/`constraints` from
+    # `to_state.models[*].options`). Passing the caller's state directly
+    # would break re-use of the same `ProjectState` across calls — which
+    # Django 6.0 enforces by removing the safe default on the pop.
     autodetector = MigrationAutodetector(
-        from_state or loader.project_state(),
-        to_state or ProjectState.from_apps(apps),
+        (from_state or loader.project_state()).clone(),
+        (to_state or ProjectState.from_apps(apps)).clone(),
         questioner,
     )
 

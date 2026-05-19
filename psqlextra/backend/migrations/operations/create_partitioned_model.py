@@ -76,7 +76,11 @@ class PostgresCreatePartitionedModel(CreateModel):
         # replace CreateModel operation with PostgresCreatePartitionedModel
         if isinstance(result, list) and result:
             for i, op in enumerate(result):
-                if isinstance(op, CreateModel):
+                # `type(op) is CreateModel` (not `isinstance`) so we don't
+                # re-wrap our own subclass — Django 6.0's optimizer can
+                # return the merged subclass in the result list, which
+                # already carries `partitioning_options`.
+                if type(op) is CreateModel:
                     _, args, kwargs = op.deconstruct()
                     result[i] = PostgresCreatePartitionedModel(
                         *args,
