@@ -44,21 +44,19 @@ class HStoreValue(expressions.Expression):
         """
 
         sql = []
-        params = []
+        params: tuple = ()
 
         for key, value in self.value.items():
             if hasattr(value, "as_sql"):
                 inner_sql, inner_params = value.as_sql(compiler, connection)
                 sql.append(f"hstore(%s, {inner_sql})")
-                params.append(key)
-                params.extend(inner_params)
+                params += (key, *inner_params)
             elif value is not None:
                 sql.append("hstore(%s, %s)")
-                params.append(key)
-                params.append(str(value))
+                params += (key, str(value))
             else:
                 sql.append("hstore(%s, NULL)")
-                params.append(key)
+                params += (key,)
 
         return " || ".join(sql), params
 
@@ -105,7 +103,7 @@ class HStoreColumn(expressions.Col):
         return (
             "%s.%s->'%s'"
             % (qn(self.alias), qn(self.target.column), self.hstore_key),
-            [],
+            (),
         )
 
     def relabeled_clone(self, relabels):

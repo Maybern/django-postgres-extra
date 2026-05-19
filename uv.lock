@@ -2,14 +2,15 @@ version = 1
 revision = 3
 requires-python = ">=3.7"
 resolution-markers = [
-    "python_full_version >= '3.11'",
+    "python_full_version >= '3.12'",
+    "python_full_version == '3.11.*'",
 ]
 supported-markers = [
     "python_full_version >= '3.11'",
 ]
 
 [options]
-exclude-newer = "2026-04-22T11:01:24.585394269Z"
+exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
 exclude-newer-span = "P3D"
 
 [[package]]
@@ -551,23 +552,44 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.2.13"
+version = "5.2.14"
 source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "asgiref", marker = "python_full_version >= '3.11'" },
-    { name = "sqlparse", marker = "python_full_version >= '3.11'" },
-    { name = "tzdata", marker = "python_full_version >= '3.11' and sys_platform == 'win32'" },
+resolution-markers = [
+    "python_full_version == '3.11.*'",
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1f/c5/c69e338eb2959f641045802e5ea87ca4bf5ac90c5fd08953ca10742fad51/django-5.2.13.tar.gz", hash = "sha256:a31589db5188d074c63f0945c3888fad104627dfcc236fb2b97f71f89da33bc4", size = 10890368, upload-time = "2026-04-07T14:02:15.072Z" }
+dependencies = [
+    { name = "asgiref", marker = "python_full_version == '3.11.*'" },
+    { name = "sqlparse", marker = "python_full_version == '3.11.*'" },
+    { name = "tzdata", marker = "python_full_version == '3.11.*' and sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/65/95/95f7faa0950867afaa0bef2460c6263afd6a2c78cc9434046ed28160b015/django-5.2.14.tar.gz", hash = "sha256:58a63ba841662e5c686b57ba1fec52ddd68c0b93bd96ac3029d55728f00bf8a2", size = 10895118, upload-time = "2026-05-05T13:57:31.104Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/59/b1/51ab36b2eefcf8cdb9338c7188668a157e29e30306bfc98a379704c9e10d/django-5.2.13-py3-none-any.whl", hash = "sha256:5788fce61da23788a8ce6f02583765ab060d396720924789f97fa42119d37f7a", size = 8310982, upload-time = "2026-04-07T14:02:08.883Z" },
+    { url = "https://files.pythonhosted.org/packages/14/44/f172870cf87aa25afef48fb72adba89ee8b77fcab6f3b23d240b923f1528/django-5.2.14-py3-none-any.whl", hash = "sha256:6f712143bd3064310d1f50fac859c3e9a274bdcfc9595339853be7779297fc76", size = 8311320, upload-time = "2026-05-05T13:57:25.795Z" },
+]
+
+[[package]]
+name = "django"
+version = "6.0.5"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.12'",
+]
+dependencies = [
+    { name = "asgiref", marker = "python_full_version >= '3.12'" },
+    { name = "sqlparse", marker = "python_full_version >= '3.12'" },
+    { name = "tzdata", marker = "python_full_version >= '3.12' and sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5e/f1/bf85f0d29ef76abf901f193fe8fef4769d3da7794197832bc30151c071d8/django-6.0.5.tar.gz", hash = "sha256:bc6d6872e98a2864c836e42edd644b362db311147dd5aa8d5b82ba7a032f5269", size = 10924131, upload-time = "2026-05-05T13:54:39.329Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/5b/1328f8b84fce040c404f76822bf8c57d254e368e8cbd8bd67ec2b26d75f5/django-6.0.5-py3-none-any.whl", hash = "sha256:9d58a7cb49244e74c8e161d5e403a46d6209f1009ba40f5a66d6aa0d0786a8f0", size = 8368680, upload-time = "2026-05-05T13:54:33.532Z" },
 ]
 
 [[package]]
 name = "django-postgres-extra"
 source = { editable = "." }
 dependencies = [
-    { name = "django", marker = "python_full_version >= '3.11'" },
+    { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "python-dateutil", marker = "python_full_version >= '3.11'" },
 ]
 
@@ -624,8 +646,8 @@ requires-dist = [
     { name = "coverage", marker = "python_full_version < '3.8' and extra == 'test'", specifier = "==6.2" },
     { name = "coverage", marker = "python_full_version >= '3.9' and extra == 'test'", specifier = "==7.8.2" },
     { name = "coveralls", marker = "extra == 'test-report'", specifier = "==4.0.1" },
-    { name = "django", specifier = ">=2.0,<6.0" },
-    { name = "django-stubs", marker = "extra == 'analysis'", specifier = "==4.2.7" },
+    { name = "django", specifier = ">=2.0,<7.0" },
+    { name = "django-stubs", marker = "extra == 'analysis'", specifier = "==6.0.4" },
     { name = "docformatter", marker = "extra == 'analysis'", specifier = "==1.7.7" },
     { name = "docutils", marker = "extra == 'docs'", specifier = "==0.21.2" },
     { name = "flake8", marker = "extra == 'analysis'", specifier = "==7.2.0" },
@@ -665,31 +687,32 @@ provides-extras = ["dev", "test", "test-report", "analysis", "docs", "publish"]
 
 [[package]]
 name = "django-stubs"
-version = "4.2.7"
+version = "6.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "django", marker = "python_full_version >= '3.11'" },
+    { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "django-stubs-ext", marker = "python_full_version >= '3.11'" },
-    { name = "types-pytz", marker = "python_full_version >= '3.11'" },
     { name = "types-pyyaml", marker = "python_full_version >= '3.11'" },
     { name = "typing-extensions", marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1c/1f/1b1da357d37cbbf21496c17aad5a55416c7c37944a909c4a19ddd61994df/django-stubs-4.2.7.tar.gz", hash = "sha256:8ccd2ff4ee5adf22b9e3b7b1a516d2e1c2191e9d94e672c35cc2bc3dd61e0f6b", size = 258590, upload-time = "2023-12-05T19:02:28.493Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/82/ccf2a2dc9cdb4bd9cbe91f11e887589bf2da7609506db00ccbc73bd8a6da/django_stubs-6.0.4.tar.gz", hash = "sha256:7aee77e8de9c14c0d9cf84988befe826d93cbc15a87e0ade2943f14d553451cf", size = 280019, upload-time = "2026-05-09T21:24:30.436Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/31/33/a4024662b31999841bc18ef845a790f6b6a9ad50f5b2aceb029896612d17/django_stubs-4.2.7-py3-none-any.whl", hash = "sha256:4cf4de258fa71adc6f2799e983091b9d46cfc67c6eebc68fe111218c9a62b3b8", size = 456669, upload-time = "2023-12-05T19:02:25.29Z" },
+    { url = "https://files.pythonhosted.org/packages/ba/e7/5128914ada94dd6277626ef5a4a5680a4def7d2f9366214d26c1cd86723b/django_stubs-6.0.4-py3-none-any.whl", hash = "sha256:e991c68f77239663577a5f4fc75e99c84f867f378cafc97cbf4acc5aff378279", size = 543791, upload-time = "2026-05-09T21:24:28.218Z" },
 ]
 
 [[package]]
 name = "django-stubs-ext"
-version = "6.0.3"
+version = "6.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "django", marker = "python_full_version >= '3.11'" },
+    { name = "django", version = "5.2.14", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "django", version = "6.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "typing-extensions", marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/e6/5dcdaa785ec3eed5fc196c7e68fb7ad9d9fe6d5acccea4690e65f2546417/django_stubs_ext-6.0.3.tar.gz", hash = "sha256:3307d42132bc295d5744de6276bc5fdf6896efc70f891e21c0ae8bdf529d2762", size = 6663, upload-time = "2026-04-18T15:10:53.667Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c6/b0/94335dc59138483c2bd2edf81cb39240fdef5e72c8cf0a6c177db207617b/django_stubs_ext-6.0.4.tar.gz", hash = "sha256:ff21f7b4362928b56e18cda0595f296e33c665f3019f4e3e4231977385e76cac", size = 6684, upload-time = "2026-05-09T21:24:02.745Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/10/fa/0a3a05c29d6295dbd52fa3cb4047a95de11ba4f2696072d6f3f2c1e6f370/django_stubs_ext-6.0.3-py3-none-any.whl", hash = "sha256:9e4105955419ae310d7da9cfd808e039d4dae3092c628f021057bb4f2c237f8f", size = 10354, upload-time = "2026-04-18T15:10:52.395Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/42/7db8470c0e276e7c7763c468441381dfa8727a360c68473f33ef828422bb/django_stubs_ext-6.0.4-py3-none-any.whl", hash = "sha256:0434a912bb08a370afcac9e90305c53e6f4eed3c1d1d46962559da5f8dbb8f27", size = 10373, upload-time = "2026-05-09T21:24:01.291Z" },
 ]
 
 [[package]]
@@ -1759,15 +1782,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ef/88/d65ed807393285204ab6e2801e5d11fbbea811adcaa979a2ed3b67a5ef41/types_python_dateutil-2.9.0.20250516.tar.gz", hash = "sha256:13e80d6c9c47df23ad773d54b2826bd52dbbb41be87c3f339381c1700ad21ee5", size = 13943, upload-time = "2025-05-16T03:06:58.385Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c5/3f/b0e8db149896005adc938a1e7f371d6d7e9eca4053a29b108978ed15e0c2/types_python_dateutil-2.9.0.20250516-py3-none-any.whl", hash = "sha256:2b2b3f57f9c6a61fba26a9c0ffb9ea5681c9b83e69cd897c6b5f668d9c0cab93", size = 14356, upload-time = "2025-05-16T03:06:57.249Z" },
-]
-
-[[package]]
-name = "types-pytz"
-version = "2026.1.1.20260408"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f7/b7/33f5a4f29b1f285b99ff79a607751a7996194cbb98705e331dab7a2daa28/types_pytz-2026.1.1.20260408.tar.gz", hash = "sha256:89b6a34b9198ea2a4b98a9d15cbca987053f52a105fd44f7ce3789cae4349408", size = 10788, upload-time = "2026-04-08T04:28:14.54Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ae/90/12c059e6bb330a22d9cc97daf027ac7fb7f50fbf518e4d88185b4d39120e/types_pytz-2026.1.1.20260408-py3-none-any.whl", hash = "sha256:c7e4dec76221fb7d0c97b91ad8561d689bebe39b6bcb7b728387e7ffd8cde788", size = 10124, upload-time = "2026-04-08T04:28:13.353Z" },
 ]
 
 [[package]]
